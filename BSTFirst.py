@@ -62,14 +62,44 @@ class BST:
             temp = temp.right
         print("\nMax : ",temp.data)
 
+    def deletenode(self, rt, val):
+        if rt is None:
+            return None
+
+        if val < rt.data:
+            rt.left = self.deletenode(rt.left, val)
+        elif val > rt.data:
+            rt.right = self.deletenode(rt.right, val)
+        else:
+            # Case 1 & 2: 0 or 1 child
+            if rt.left is None:
+                return rt.right
+            if rt.right is None:
+                return rt.left
+
+            # Case 3: 2 children -> replace with inorder successor
+            succ = self.get_successor(rt)
+            rt.data = succ.data
+            rt.right = self.deletenode(rt.right, succ.data)
+
+        return rt
+    
+    def get_successor(self,temp):
+        temp = temp.right
+        while temp is not None and temp.left is not None:
+            temp = temp.left
+        return temp
+
 
 b1= BST()
 b1.insert(Node(100))
 b1.insert(Node(10))
 b1.insert(Node(450))
-b1.insert(Node(0))
+b1.insert(Node(4))
 b1.insert(Node(65))
 b1.insert(Node(300))
+b1.insert(Node(500))
+b1.insert(Node(50))
 print("Inorder : ")
 b1.inorder(b1.root)
 print("\nPreorder : ")
@@ -77,8 +107,38 @@ b1.preorder(b1.root)
 print("\nPostorder : ")
 b1.postorder(b1.root)
 b1.findminmax(b1)
+print()
+b1.deletenode(b1.root,4)
+print("\nInorder after delete : ")
+b1.inorder(b1.root)
+b1.deletenode(b1.root,65)
+print("\nInorder after delete : ")
+b1.inorder(b1.root)
+b1.deletenode(b1.root,450)
+print("\nInorder after delete : ")
+b1.inorder(b1.root)
 
-# write a code to find the min and max for bst value 
+# b1.deletenode(b1.root,4)
+# b1.deletenode(b1.root,4)
 
 
+
+
+# def deletenode(self ,rt, val):
+#         if rt is None:
+#             return rt
+#         if val<rt.data:
+#             rt.left = self.deletenode(rt.left,val)
+#         elif val>rt.data:
+#             rt.right = self.deletenode(rt.right,val)
+#         else:
+#             if rt.left is None:
+#                 return rt.right
+#             if rt.right is None:
+#                 return rt.left
+#         # when node as both left and right child 
+#         succ = self.get_successor(rt)
+#         rt.data = succ.data
+#         rt.right = self.deletenode(rt.right,succ.data)
+#         return rt
 
