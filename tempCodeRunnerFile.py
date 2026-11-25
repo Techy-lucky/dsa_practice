@@ -1,2 +1,3 @@
-b1.deletenode(b1.root,4)
-# b1.deletenode(b1.root,4)
+
+b1.search(50)
+b1.search(151)
