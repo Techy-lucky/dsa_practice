@@ -1,3 +1,15 @@
-
-b1.search(50)
-b1.search(151)
+if self.root is None:
+            self.root = new_node
+        else:
+            temp = self.root
+            while True:
+                if new_node.data < temp.data:
+                    if temp.left is None:
+                        temp.left = new_node
+                        return
+                    temp = temp.left
+                else:
+                    if temp.right is None:
+                        temp.right = new_node
+                        return
+                    temp = temp.right
